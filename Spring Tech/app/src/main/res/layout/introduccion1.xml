@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="48dp"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_family"
+        android:gravity="left"
+        android:layout_weight="1"
+        android:text="Encuentra Técnicos de Confianza en Línea"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="40dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="311dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img1" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/font_family"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="Tu Plataforma de Confianza para Reparaciones y Mantenimiento en el Hogar"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/Sig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/circulo"
+        android:src="@drawable/baseline_arrow_forward_24" />
+
+</LinearLayout>

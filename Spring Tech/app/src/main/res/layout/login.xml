@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="48dp"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/font_family"
+        android:gravity="center_horizontal"
+        android:text="INICIAR SESIÓN"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/font_family"
+        android:gravity="center_vertical"
+        android:text="Correo"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/redondeo"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColorHint="@color/gris_oscuro"
+        android:layout_weight="0.2"
+        android:hint="Escribre tu correo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_family"
+        android:gravity="center_vertical"
+        android:text="Contraseña"
+        android:layout_weight="1"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/contra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/redondeo"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColorHint="@color/gris_oscuro"
+        android:layout_weight="0.2"
+        android:hint="Escribe tu contraseña" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/ing"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:textSize="18dp"
+        android:backgroundTint="@color/secundario"
+        android:background="@drawable/redondeo"
+        android:layout_gravity="center"
+        android:text="Ingresar" />
+
+    <TextView
+        android:id="@+id/reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:fontFamily="@font/font_family"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="No tienes una cuenta? Crea una."
+        android:textColor="@color/gris_oscuro"
+        android:textSize="10sp" />
+
+</LinearLayout>
