@@ -30,7 +30,7 @@
             android:layout_height="311dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img2" />
-
+        
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
