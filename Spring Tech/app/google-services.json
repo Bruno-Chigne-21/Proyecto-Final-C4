@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "269338573213",
+    "project_id": "proyecto-final-3c",
+    "storage_bucket": "proyecto-final-3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269338573213:android:43a31443c5d9f52c4d9774",
+        "android_client_info": {
+          "package_name": "com.example.springtech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl4E0P5jcQAwqQJC3sQg28juadE0GalWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="48dp"
     android:background="@android:color/white"
-    tools:context=".MainActivity">
+    tools:context=".ui.Introduccion.LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -60,10 +60,10 @@
         android:layout_weight="0.2"
         android:hint="Escribe tu contraseña" />
 
-    <TextView
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1.5" />
 
     <Button
         android:id="@+id/ing"
