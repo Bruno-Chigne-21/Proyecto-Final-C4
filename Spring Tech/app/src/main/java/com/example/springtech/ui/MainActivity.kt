@@ -1,62 +1,56 @@
 package com.example.springtech.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.os.Handler
+import android.view.View
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.springtech.R
-import com.example.springtech.io.ApiService
-import com.example.springtech.io.response.LoginResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.security.MessageDigest
+import com.example.springtech.bd.BaseDatos
+import com.example.springtech.ui.Introduccion.IntroActivity1
+import com.example.springtech.ui.SPT.HomeActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val apiService: ApiService by lazy {
-        ApiService.create()
-    }
+    private val handler = Handler()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.loading_activity)
 
-        val ini = findViewById<Button>(R.id.ing)
-        ini.setOnClickListener{
-            performLogin()
-        }
+        progressBar = findViewById(R.id.progressBar)
 
+        showLoadingScreen()
+
+        handler.postDelayed({
+
+            hideLoadingScreen()
+
+        }, 3000)
     }
 
-    private fun performLogin(){
-        val etEmail = findViewById<EditText>(R.id.correo).text.toString()
-        val etPassword = findViewById<EditText>(R.id.contra).text.toString()
+    private fun showLoadingScreen() {
+        // Hace visible la ProgressBar
+        progressBar.visibility = View.VISIBLE
+    }
 
-        val call = apiService.postlogin(etEmail, etPassword)
+    private fun hideLoadingScreen() {
+        progressBar.visibility = View.GONE
 
-        call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful){
-                    val loginResponse = response.body()
-                    if (loginResponse == null){
-                        Toast.makeText(applicationContext, "Respuesta nula del servidor", Toast.LENGTH_LONG).show()
-                        return
-                    } else {
-                        Toast.makeText(applicationContext, "Todo bien", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "Error en la respuesta del servidor", Toast.LENGTH_LONG).show()
-                }
-            }
+        val baseDatos = BaseDatos(this)
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(applicationContext, "Error de red", Toast.LENGTH_LONG).show()
-            }
-        })
+        if (baseDatos.contenido()) {
 
+            startActivity(Intent(this, HomeActivity::class.java))
+
+        } else {
+
+            startActivity(Intent(this, IntroActivity1::class.java))
+
+        }
+        finish()
     }
 
 }

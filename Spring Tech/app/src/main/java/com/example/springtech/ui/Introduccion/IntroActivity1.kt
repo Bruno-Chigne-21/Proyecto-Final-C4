@@ -2,7 +2,6 @@ package com.example.springtech.ui.Introduccion
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.springtech.R

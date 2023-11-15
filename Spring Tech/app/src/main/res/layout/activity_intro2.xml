@@ -14,24 +14,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:fontFamily="@font/font_family"
-        android:gravity="left"
         android:text="QUÉ ERES?"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
 
-    <androidx.cardview.widget.CardView
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="40dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="311dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img2" />
-        
-    </androidx.cardview.widget.CardView>
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/people" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,10 +38,11 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/redondeo"
             android:backgroundTint="@color/secundario"
+            android:background="@drawable/redondeo"
+            android:textColor="@color/blanco"
             android:text="CLIENTE"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:layout_marginEnd="5dp"/>
 
         <Button
@@ -56,9 +50,10 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textSize="18dp"
-            android:background="@drawable/redondeo"
+            android:textSize="15sp"
             android:backgroundTint="@color/secundario"
+            android:background="@drawable/redondeo"
+            android:textColor="@color/blanco"
             android:layout_weight="1"
             android:text="ESPECIALISTA"
             android:layout_marginStart="5dp"/>

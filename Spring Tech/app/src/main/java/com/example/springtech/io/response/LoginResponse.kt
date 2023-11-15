@@ -4,6 +4,9 @@ import com.example.springtech.model.User
 
 data class LoginResponse(
     val message: String,
-    val user: User,
-    val token: String
-)
+    val body: Body
+) {
+    data class Body(
+        val token: String
+    )
+}

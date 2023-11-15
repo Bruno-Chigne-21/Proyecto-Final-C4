@@ -19,19 +19,13 @@
         android:textColor="@android:color/black"
         android:textSize="30sp" />
 
-    <androidx.cardview.widget.CardView
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="40dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="311dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img1" />
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/worker" />
 
     <TextView
         android:layout_width="wrap_content"

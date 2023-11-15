@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="48dp"
     android:background="@android:color/white"
-    tools:context=".ui.Introduccion.LoginActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -36,6 +36,7 @@
         android:padding="10dp"
         android:textSize="15dp"
         android:textColorHint="@color/gris_oscuro"
+        android:textColor="@color/negro"
         android:layout_weight="0.2"
         android:hint="Escribre tu correo" />
 
@@ -53,12 +54,14 @@
         android:id="@+id/contra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/redondeo"
-        android:padding="10dp"
-        android:textSize="15dp"
-        android:textColorHint="@color/gris_oscuro"
         android:layout_weight="0.2"
-        android:hint="Escribe tu contraseña" />
+        android:background="@drawable/redondeo"
+        android:hint="Escribe tu contraseña"
+        android:padding="10dp"
+        android:textColorHint="@color/gris_oscuro"
+        android:textColor="@color/negro"
+        android:inputType="textPassword"
+        android:textSize="15dp" />
 
     <Space
         android:layout_width="match_parent"
@@ -66,7 +69,7 @@
         android:layout_weight="1.5" />
 
     <Button
-        android:id="@+id/ing"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:padding="10dp"
@@ -77,7 +80,7 @@
         android:text="Ingresar" />
 
     <TextView
-        android:id="@+id/reg"
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="7"
