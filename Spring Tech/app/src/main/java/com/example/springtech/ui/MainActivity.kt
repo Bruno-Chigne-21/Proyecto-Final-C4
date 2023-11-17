@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.loading_activity)
+        setContentView(R.layout.activity_loading)
 
         progressBar = findViewById(R.id.progressBar)
 
