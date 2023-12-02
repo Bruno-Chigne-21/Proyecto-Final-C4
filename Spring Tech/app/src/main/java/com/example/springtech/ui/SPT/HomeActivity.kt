@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.springtech.R
+import com.example.springtech.bd.BaseDatos
 import com.example.springtech.io.ApiService
 import com.example.springtech.io.response.ResponseBody
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -30,6 +31,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeActivity: AppCompatActivity(), OnMapReadyCallback {
+
+    var latitud: Double = 0.0
+    var longitud: Double = 0.0
 
     //lateinit sirve para que la variable se inicialice después
     private lateinit var map:GoogleMap
@@ -97,8 +101,8 @@ class HomeActivity: AppCompatActivity(), OnMapReadyCallback {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.let {
-                    val latitud: Double = it.latitude
-                    val longitud: Double = it.longitude
+                    latitud = it.latitude
+                    longitud = it.longitude
 
                     val coordinates = LatLng(latitud, longitud)
                     map.animateCamera(
@@ -112,14 +116,23 @@ class HomeActivity: AppCompatActivity(), OnMapReadyCallback {
 
     //------------------------------------------------------------------------------------------
     //obtenemos las coordenadas y las marcamos
-    private val call = service.obtenerDatos(
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlSWQiOjIsInN1YiI6IjEiLCJpYXQiOjE3MDAxOTk4ODQsImV4cCI6MTcwMDI4NjI4NH0.4V9gAyb02F2cI-_iJySxlvmF_Ez2tPhr0Blvi9DGYqI",
-        2,
-        2,
-        "12.3456",
-        "-78.9012"
-    )
     private fun MarcarCoordenadas() {
+
+        var db = BaseDatos(this)
+        var datos = db.listarDatos()
+        var token: String? = null
+
+        for (i in 0 until datos.size) {
+            token = datos[i].token
+        }
+
+        val call = service.obtenerDatos(
+            "Bearer ${token}",
+            2,
+            2,
+            "${latitud}",
+            "${longitud}"
+        )
 
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -132,8 +145,8 @@ class HomeActivity: AppCompatActivity(), OnMapReadyCallback {
 
                             coordinatesList.clear()
 
-                            coordinatesList.addAll(technicians?.map { technical ->
-                                Pair(technical.latitude.toDouble(), technical.longitude.toDouble())
+                            coordinatesList.addAll(technicians?.map { user ->
+                                Pair(user.latitude, user.longitude)
                             } ?: emptyList())
                             Log.e("HomeActivity", "Se guardó correctamente")
                             marcador(coordinatesList)

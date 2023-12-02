@@ -11,7 +11,7 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
     //Esta funcion se ejecutara cada vez que se llame a esta clase para crear la tabla en caso no exista
     override fun onCreate(p0: SQLiteDatabase?) {
         var sql:String =
-            "CREATE TABLE IF NOT EXISTS Usuario(id Integer PRIMARY KEY AUTOINCREMENT, email VARCHAR(250), password VARCHAR(250))"
+            "CREATE TABLE IF NOT EXISTS Usuario(id Integer PRIMARY KEY, email VARCHAR(250), password VARCHAR(250), token VARCHAR(250))"
         // p0 -> objeto de la clase SQLLiteDatabase,este tiene todos los metodos sql
 
         p0?.execSQL(sql)
@@ -26,8 +26,10 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         // este contenedor se encargar de tener los campos y sus valores respectivos que deseamos ingresar
         val contenedorValores = ContentValues()
 
+        contenedorValores.put("id",usuario.id)
         contenedorValores.put("email",usuario.email)
         contenedorValores.put("password",usuario.password)
+        contenedorValores.put("token", usuario.token)
 
         //llevamos acabo la operacion sql jacion uso del p0 que tiene todo los metodos para hacer las insercesiones
         var resultado = p0.insert("Usuario",null,contenedorValores)
@@ -43,6 +45,7 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         }
     }
 
+    //mostrar datos
     fun listarDatos(): MutableList<Usuario> {
         val lista: MutableList<Usuario> = ArrayList()
         val db = this.readableDatabase
@@ -50,25 +53,27 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         val sql = "SELECT * FROM Usuario"
         val resultado = db?.rawQuery(sql, null)
 
-        if (resultado != null) {
-            resultado.moveToFirst()
-            do {
-                val usu = Usuario()
-                usu.id = resultado.getString(resultado.getColumnIndexOrThrow("id")).toInt()
-                usu.email = resultado.getString(resultado.getColumnIndexOrThrow("email"))
-                usu.password = resultado.getString(resultado.getColumnIndexOrThrow("password"))
+        resultado?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    val usu = Usuario()
+                    usu.id = cursor.getString(cursor.getColumnIndexOrThrow("id")).toInt()
+                    usu.email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
+                    usu.password = cursor.getString(cursor.getColumnIndexOrThrow("password"))
+                    usu.token = cursor.getString(cursor.getColumnIndexOrThrow("token"))
 
-                lista.add(usu)
-
-            } while (resultado.moveToNext())
-
-            resultado.close()
-            db.close()
+                    lista.add(usu)
+                } while (cursor.moveToNext())
+            }
         }
+
+        resultado?.close()
+        db.close()
 
         return lista
     }
 
+    //verificar si la tabla está o no vacía
     fun contenido(): Boolean {
         val db = this.readableDatabase
 
@@ -81,6 +86,21 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         db.close()
 
         return hayDatos
+    }
+
+    //método que es llamado en caso el token ya no esté vigente
+    fun actualizarToken(id: Int, nuevoToken: String): Boolean {
+        val db = this.writableDatabase
+
+        val contenedorValores = ContentValues()
+        contenedorValores.put("token", nuevoToken)
+
+        val resultado = db.update("Usuario", contenedorValores, "id=?", arrayOf(id.toString()))
+
+        db.close()
+
+        // Si el resultado es mayor que 0, significa que se actualizó al menos una fila.
+        return resultado > 0
     }
 
 }
