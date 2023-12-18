@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:fontFamily="@font/font_family"
-        android:text="QUÉ ERES?"
+        android:text="Este es el primer paso!"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
 
@@ -26,6 +26,17 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/people" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_family"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="Obten nuestro beneficios"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -33,23 +44,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cliente"
+            android:id="@+id/reg"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:backgroundTint="@color/secundario"
-            android:text="CLIENTE"
+            android:text="Regístrate"
             android:textColor="@android:color/white"
+            android:layout_gravity="center"
             android:textSize="15.4sp"
             android:layout_marginEnd="5dp"/>
 
         <Button
-            android:id="@+id/especialista"
+            android:id="@+id/ing"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:backgroundTint="@color/secundario"
-            android:text="ESPECIALISTA"
+            android:text="Ingresa"
+            android:layout_gravity="center"
             android:textSize="15.4sp"
             android:textColor="@color/blanco"
             android:layout_marginStart="5dp"/>

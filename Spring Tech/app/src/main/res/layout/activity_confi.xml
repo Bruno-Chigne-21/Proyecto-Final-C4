@@ -2,22 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="@color/blanco"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_weight="0"
+        android:background="@color/principal">
+
+        <ImageButton
+            android:id="@+id/atras"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_arrow_forward_25"
+            android:rotation="180"
+            android:background="@color/principal"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configuraciones"
+            android:fontFamily="@font/font_family"
+            android:textColor="@color/negro"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/actu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/secundario"
-        android:layout_weight="1"
-        />
-    
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_family"
+        android:text="Editar perfil"
+        android:textColor="@color/negro"
+        android:textSize="16sp"
+        android:padding="8sp"
+        android:gravity="center_vertical"
+        android:layout_weight="2"/>
+
+    <TextView
+        android:id="@+id/cerrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_family"
+        android:text="Cerrar sesión"
+        android:textColor="@color/negro"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:layout_weight="2"/>
+
+    <TextView
+        android:id="@+id/borrar"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_family"
+        android:text="Eliminar Cuenta"
+        android:textColor="@color/negro"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:layout_weight="2"/>
+
     <Space
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-
-
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="25"/>
 
 </LinearLayout>

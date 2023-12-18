@@ -28,17 +28,17 @@
         android:textColor="@android:color/black"
         android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/correo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/redondeo"
-            android:padding="10dp"
-            android:textSize="15dp"
-            android:textColorHint="@color/gris_oscuro"
-            android:textColor="@color/negro"
-            android:layout_weight="0.2"
-            android:hint="Escribre tu correo" />
+    <EditText
+        android:id="@+id/correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/redondeo"
+        android:padding="10dp"
+        android:textSize="15dp"
+        android:textColorHint="@color/gris_oscuro"
+        android:textColor="@color/negro"
+        android:layout_weight="0.2"
+        android:hint="Escribre tu correo" />
 
     <TextView
         android:layout_width="match_parent"

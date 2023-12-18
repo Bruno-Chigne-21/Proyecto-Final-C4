@@ -1,11 +1,43 @@
 package com.example.springtech.io.response
 
-data class ResponseBody(
-    val message: String,
-    val body: List<User>
+data class Role(
+    val id: Int,
+    val name: String
 )
 
 data class User(
+    val id: Int,
+    val email: String,
+    val role: Role,
+    val state: String
+)
+
+data class ProfessionAvailability(
+    val id: Int,
+    val profession: Profession,
+    val availability: Availability,
+    val experience: Experience,
+    val latitude: Double? = 0.0,
+    val longitude: Double? = 0.0
+)
+
+
+data class Profession(
+    val id: Int,
+    val name: String
+)
+
+data class Availability(
+    val id: Int,
+    val name: String
+)
+
+data class Experience(
+    val id: Int,
+    val name: String
+)
+
+data class Person(
     val id: Int,
     val name: String,
     val lastname: String,
@@ -14,17 +46,12 @@ data class User(
     val latitude: Double,
     val longitude: Double,
     val birthDate: Long,
-    val user: UserInfo
+    val user: User,
+    val professionAvailability: ProfessionAvailability,
+    val statusWorking: String
 )
 
-data class UserInfo(
-    val id: Int,
-    val email: String,
-    val role: UserRole,
-    val state: String
-)
-
-data class UserRole(
-    val id: Int,
-    val name: String
+data class CoordinatesResponse(
+    val message: String,
+    val body: List<Person>
 )

@@ -11,16 +11,16 @@ class IntroActivity2: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro2)
 
-        val cli = findViewById<Button>(R.id.cliente)
-        val esp = findViewById<Button>(R.id.especialista)
+        val ingresa = findViewById<Button>(R.id.ing)
+        val registrar = findViewById<Button>(R.id.reg)
 
-        cli.setOnClickListener {
+        ingresa.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        esp.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+        registrar.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }

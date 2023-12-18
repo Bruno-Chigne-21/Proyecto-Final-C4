@@ -4,14 +4,15 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import kotlinx.coroutines.CoroutineScope
 
 val BD="BaseDatos"
 class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
 
     //Esta funcion se ejecutara cada vez que se llame a esta clase para crear la tabla en caso no exista
     override fun onCreate(p0: SQLiteDatabase?) {
-        var sql:String =
-            "CREATE TABLE IF NOT EXISTS Usuario(id Integer PRIMARY KEY, email VARCHAR(250), password VARCHAR(250), token VARCHAR(250))"
+        var sql: String =
+            "CREATE TABLE IF NOT EXISTS Usuario(idUser INTEGER PRIMARY KEY, idClient INTEGER, email VARCHAR(250), password VARCHAR(250), token VARCHAR(250))"
         // p0 -> objeto de la clase SQLLiteDatabase,este tiene todos los metodos sql
 
         p0?.execSQL(sql)
@@ -26,7 +27,8 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         // este contenedor se encargar de tener los campos y sus valores respectivos que deseamos ingresar
         val contenedorValores = ContentValues()
 
-        contenedorValores.put("id",usuario.id)
+        contenedorValores.put("idUser",usuario.idUser)
+        contenedorValores.put("idClient",usuario.idClient)
         contenedorValores.put("email",usuario.email)
         contenedorValores.put("password",usuario.password)
         contenedorValores.put("token", usuario.token)
@@ -57,7 +59,8 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
             if (cursor.moveToFirst()) {
                 do {
                     val usu = Usuario()
-                    usu.id = cursor.getString(cursor.getColumnIndexOrThrow("id")).toInt()
+                    usu.idUser = cursor.getString(cursor.getColumnIndexOrThrow("idUser")).toInt()
+                    usu.idClient = cursor.getString(cursor.getColumnIndexOrThrow("idClient")).toInt()
                     usu.email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
                     usu.password = cursor.getString(cursor.getColumnIndexOrThrow("password"))
                     usu.token = cursor.getString(cursor.getColumnIndexOrThrow("token"))
@@ -95,11 +98,23 @@ class BaseDatos(contexto: Context):SQLiteOpenHelper(contexto, BD,null,1) {
         val contenedorValores = ContentValues()
         contenedorValores.put("token", nuevoToken)
 
-        val resultado = db.update("Usuario", contenedorValores, "id=?", arrayOf(id.toString()))
+        val resultado = db.update("Usuario", contenedorValores, "idUser=?", arrayOf(id.toString()))
 
         db.close()
 
         // Si el resultado es mayor que 0, significa que se actualizó al menos una fila.
+        return resultado > 0
+    }
+
+
+    //elimina la base de datos
+    fun dropAll(): Boolean {
+        val db = this.writableDatabase
+
+        val resultado = db.delete("Usuario", null, null)
+
+        db.close()
+
         return resultado > 0
     }
 

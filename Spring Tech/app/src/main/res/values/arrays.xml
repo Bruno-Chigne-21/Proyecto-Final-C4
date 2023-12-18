@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="availabitly">
+        <item>Disponibilidad</item>
+        <item>A domicilio</item>
+        <item>Taller</item>
+        <item>Ambos</item>
+    </array>
+
+    <array name="profession">
+        <item>Profesión</item>
+        <item>Mecánico</item>
+        <item>Plomero</item>
+        <item>Electricista</item>
+    </array>
+
+</resources>

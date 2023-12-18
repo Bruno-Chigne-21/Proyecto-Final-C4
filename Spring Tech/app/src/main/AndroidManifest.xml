@@ -8,6 +8,7 @@
 
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,7 +17,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpringTech"
-        tools:targetApi="31"
+        tools:targetApi="tiramisu"
         android:usesCleartextTraffic="true">
 
         <meta-data
@@ -47,6 +48,23 @@
 
         <activity
             android:name=".ui.SPT.HomeActivity">
+        </activity>
+
+        <activity
+            android:name=".ui.SPT.SettingsActivity">
+        </activity>
+
+        <activity
+            android:name=".ui.SPT.ProfileActivity">
+        </activity>
+
+        <activity
+            android:name=".ui.SPT.ListaActActivity">
+        </activity>
+
+        <activity
+            android:name=".ui.Introduccion.RegisterActivity">
+
         </activity>
 
     </application>

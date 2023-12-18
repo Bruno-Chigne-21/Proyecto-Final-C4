@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blanco"
+    android:layout_weight="0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_weight="0"
+        android:background="@color/principal">
+
+        <ImageButton
+            android:id="@+id/atras"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_arrow_forward_25"
+            android:rotation="180"
+            android:background="@color/principal"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:textColor="@color/negro"
+            android:fontFamily="@font/font_family"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="48dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/nom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/redondeo"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textColorHint="@color/gris_oscuro"
+            android:textColor="@color/negro"
+            android:hint="Nombre"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/pat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/redondeo"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textColorHint="@color/gris_oscuro"
+            android:textColor="@color/negro"
+            android:hint="Apelido Parterno"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/mat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/redondeo"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textColorHint="@color/gris_oscuro"
+            android:textColor="@color/negro"
+            android:hint="Apelido Materno"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/dni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/redondeo"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textColorHint="@color/gris_oscuro"
+            android:textColor="@color/negro"
+            android:hint="Dni"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/cum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/redondeo"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:textColorHint="@color/gris_oscuro"
+            android:textColor="@color/negro"
+            android:hint="Cumpleaños"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/secundario"
+            android:layout_gravity="center"
+            android:text="Listo" />
+
+    </LinearLayout>
+
+</LinearLayout>

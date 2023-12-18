@@ -13,6 +13,7 @@ import com.example.springtech.R
 import com.example.springtech.bd.BaseDatos
 import com.example.springtech.bd.Usuario
 import com.example.springtech.io.ApiService
+import com.example.springtech.io.response.ClientResponse
 import com.example.springtech.io.response.JwtResponse
 import com.example.springtech.io.response.LoginRequest
 import com.example.springtech.io.response.LoginResponse
@@ -20,12 +21,14 @@ import com.example.springtech.ui.SPT.HomeActivity
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private var urlbase = "http://192.168.84.1:8000/api/v1/auth/"
+    //login
+    private var urlbase1 = "http://192.168.84.1:8000/api/v1/auth/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +40,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(urlbase)
+    private var retrofit1: Retrofit = Retrofit.Builder()
+        .baseUrl(urlbase1)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val service: ApiService = retrofit.create(ApiService::class.java)
+    private val service1: ApiService = retrofit1.create(ApiService::class.java)
+
+    //client
+    private var urlbase2 = "http://192.168.84.1:8000/api/v1/"
+    private var retrofit2: Retrofit = Retrofit.Builder()
+        .baseUrl(urlbase2)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    private val service2: ApiService = retrofit2.create(ApiService::class.java)
 
     private fun LogIn(view: View){
         val correo = findViewById<EditText>(R.id.correo).text.toString()
@@ -54,16 +65,25 @@ class LoginActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                val result: LoginResponse = service.login(user)
-                val token = result.body.token
-                val id = descrip(token)
+                val result1: LoginResponse = service1.login(user)
+                val token = result1.body.token
+                val idUser = descrip(token)
+                val result2: Response<ClientResponse> = service2.getClient(
+                    idUser.toInt(),
+                    "Bearer ${token}"
+                )
 
                 runOnUiThread {
-                    if (result.message == "Autenticado correctamente"){
-                        Toast.makeText(view.context, "Logeado!", Toast.LENGTH_LONG).show()
-                        GuardarDatos(id.toInt(), correo, contra, token)
-                        verDatos()
-                        startActivity(intent)
+                    if (result1.message == "Autenticado correctamente"){
+                        if (result2.isSuccessful){
+                            val idClient = result2.body()?.body?.id
+                            Toast.makeText(view.context, "Logeado!", Toast.LENGTH_LONG).show()
+                            if (idClient != null) {
+                                GuardarDatos(idUser.toInt(), idClient.toInt(),correo, contra, token)
+                            }
+                            verDatos()
+                            startActivity(intent)
+                        }
                     } else{
                         Toast.makeText(view.context, "Algo anda mal :(", Toast.LENGTH_LONG).show()
                     }
@@ -77,13 +97,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //método para guardar los datos en la base de datos local
-    private fun GuardarDatos(id: Int, email: String, password: String, token: String) {
+    private fun GuardarDatos(idUser: Int, idClient: Int, email: String, password: String, token: String) {
         try {
             var db = BaseDatos(this)
             var usu = Usuario()
 
             if (email.isNotEmpty() && password.isNotEmpty() && token.isNotEmpty()) {
-                usu.id = id
+                usu.idUser = idUser
+                usu.idClient = idClient
                 usu.email = email
                 usu.password = password
                 usu.token = token
@@ -106,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
         var datos = db.listarDatos()
 
         for (i in 0 until datos.size) {
-            Log.i("Datos", "Código: ${datos[i].id}, Email: ${datos[i].email}, Password: ${datos[i].password}, Token: ${datos[i].token}")
+            Log.i("Datos", "IdUser: ${datos[i].idUser}, IdClient: ${datos[i].idClient}, Email: ${datos[i].email}, Password: ${datos[i].password}, Token: ${datos[i].token}")
         }
     }
 

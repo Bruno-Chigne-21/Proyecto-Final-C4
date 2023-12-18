@@ -63,11 +63,11 @@ class MainActivity : AppCompatActivity() {
             if (baseDatos.contenido()) {
                 val datos = baseDatos.listarDatos()
                 for (i in 0 until datos.size) {
+                    val usuarioId = datos[i].idClient
                     token = datos[i].token
                     if (isTokenValid(token)) {
                         startActivity(intentHome)
-                        finish()
-                        return
+
                     } else {
                         Log.d("MainActivity", "Token no válido. Llamando al servicio de login.")
                         val user = LoginRequest(datos[i].email, datos[i].password)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                                 val token = result.body.token
 
                                 if (result.message == "Autenticado correctamente") {
-                                    if (baseDatos.actualizarToken(1, token)) {
+                                    if (baseDatos.actualizarToken(usuarioId, token)) {
                                         Log.i("MainActivity", "Token Actualizado correctamente")
                                         startActivity(intentHome)
                                         finish()
@@ -101,9 +101,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Log.d("MainActivity", "La base de datos no tiene contenido. Redirigiendo a IntroActivity1.")
                 startActivity(intentIntro)
-                finish()
-                return
             }
+
         } catch (e: Exception) {
             e.printStackTrace()
             Log.e("MainActivity", "Error general: ${e.message}")
@@ -119,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
                 .parseClaimsJws(token)
                 .body
+            // El token es válido
             return !claims.expiration.before(Date())
 
         } catch (e: Exception) {
@@ -126,7 +126,4 @@ class MainActivity : AppCompatActivity() {
             return false
         }
     }
-    
-
-
 }
